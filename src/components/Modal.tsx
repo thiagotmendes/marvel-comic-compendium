@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/Api";
-import ReactHtmlParser from 'react-html-parser';
+import parse from 'html-react-parser';
 import modalStyle from "./Modal.module.css";
 import { CharacterSlider } from "./CharacterSlider";
 
@@ -14,8 +14,8 @@ import { Navigation } from "swiper/modules";
 interface ModalComicData {
     data: {
         results: {
-            title: String;
-            description: String
+            title: string;
+            description: string
             thumbnail: {
                 path: string;
                 extension: string;
@@ -29,7 +29,7 @@ interface ModalComicData {
 
 export function Modal(props: any) {
     const [comic, setComic] = useState<ModalComicData | null>(null);
-    const { status, setStatus } = props;
+    const { setStatus } = props;
 
     async function getData() {
         await api
@@ -55,7 +55,7 @@ export function Modal(props: any) {
     }
     
     if ( comic && comic?.data.results.length > 0 ) {
-        const charactersList = comic.data.results[0].characters.items
+        const charactersList = comic?.data.results[0].characters.items
 
         return (
             <div id="modal-box"  className={modalStyle.modal} > 
@@ -67,10 +67,11 @@ export function Modal(props: any) {
                     <div className={modalStyle.modalDescription}>
                         <h2> { comic.data.results[0].title } </h2>
                         <div>
-                            { ReactHtmlParser(comic.data.results[0].description) }
+                            { parse(comic.data.results[0].description) }
                         </div> 
                         <h4 className={modalStyle.character_list_title}> Character list </h4>
-                        <Swiper
+                        <Swiper 
+                            key="1"
                             spaceBetween={15}
                             slidesPerView={3}
                             modules={[Navigation]}
