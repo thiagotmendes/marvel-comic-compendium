@@ -11,21 +11,36 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Navigation } from "swiper/modules";
 
+interface ModalComicData {
+    data: {
+        results: {
+            title: String;
+            description: String
+            thumbnail: {
+                path: string;
+                extension: string;
+            };
+            characters: {
+                items: []
+            }
+        }[]
+    }
+}
 
 export function Modal(props: any) {
-    const [comic, setComic] = useState();
+    const [comic, setComic] = useState<ModalComicData | null>(null);
     const { status, setStatus } = props;
 
     async function getData() {
         await api
-            .get("/comics/" + props.modalId, {
+            .get<ModalComicData>("/comics/" + props.modalId, {
                 params: {
                     ts: import.meta.env.VITE_APP_API_TSL,
                     apikey: import.meta.env.VITE_APP_API_KEY,
                     hash: import.meta.env.VITE_APP_API_HASH
                 }
             })
-            .then( ( response: { data: React.SetStateAction<undefined>; } ) => setComic( response.data ) )
+            .then( ( response: { data: React.SetStateAction<ModalComicData | null> } ) => setComic( response.data ) )
             .catch( ( err: string ) => {
                 console.log( "An error ocourring " + err)
             } );
@@ -39,7 +54,7 @@ export function Modal(props: any) {
         setStatus(false)
     }
     
-    if ( typeof comic !== 'undefined' ) {
+    if ( comic && comic?.data.results.length > 0 ) {
         const charactersList = comic.data.results[0].characters.items
 
         return (
@@ -61,8 +76,6 @@ export function Modal(props: any) {
                             modules={[Navigation]}
                             navigation
                             pagination={{ clickable: true }}
-                            // onSlideChange={() => console.log('slide change')}
-                            // onSwiper={(swiper) => console.log(swiper)}
                             >
                             {
                                 charactersList.map( ( character: any ) => {
