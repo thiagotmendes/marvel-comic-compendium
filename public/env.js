@@ -1,0 +1,5 @@
+window.env = {
+  "REACT_APP_API_KEY": "bdae332a13dfeb2bc10833f40ceb45e9",
+  "REACT_APP_API_HASH": "48d74183174570d477519ac8d7fa208c",
+  "REACT_APP_API_TSL": "1"
+};

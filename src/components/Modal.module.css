@@ -1,0 +1,57 @@
+.modal {
+    display: flex;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.6);;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalBody {
+    background-color: white;
+    width: 70%;
+    height: auto;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    position: relative;
+}
+
+.modalDescription {
+    padding: 20px;
+    font-size: 13px;
+}
+
+.modalDescription h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.modalDescription p {
+    margin-bottom: 8px;
+}
+
+.close {
+    position: absolute;
+    right: -15px;
+    border-radius: 50%;
+    border: solid 2px black;
+    top: -15px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    cursor: pointer;
+}
+
+.character_list_title {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 22px;
+}

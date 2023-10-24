@@ -1,0 +1,22 @@
+.box {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+    display: flex;
+    flex-flow: column;
+    font-size: 13px;
+    justify-content: space-between;
+}
+
+.box:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.box .title {
+    padding: 5px 10px;
+    font-weight: 700;
+    height: 69px;
+}
+
+/* .box_img {
+    height: 366px;
+    overflow: hidden;
+} */
