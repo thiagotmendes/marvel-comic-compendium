@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/Api";
-import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import ReactHtmlParser from 'react-html-parser';
 import modalStyle from "./Modal.module.css";
-import { CharacterSlider } from "./characterSlider";
+import { CharacterSlider } from "./CharacterSlider";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
