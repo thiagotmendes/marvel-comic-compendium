@@ -53,7 +53,7 @@ export function Home() {
 
         return (
             <>
-                <div className="grid grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-4 md:gap-6">
                 {
                     comicList.map ( ( comic ) =>  {
                         return(

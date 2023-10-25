@@ -5,11 +5,14 @@ import modalStyle from "./Modal.module.css";
 import { CharacterSlider } from "./CharacterSlider";
 
 // Import Swiper React components
+import { Navigation, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
-import { Navigation } from "swiper/modules";
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 
 interface ModalComicData {
     data: {
@@ -74,15 +77,20 @@ export function Modal(props: any) {
                             key="1"
                             spaceBetween={15}
                             slidesPerView={3}
-                            modules={[Navigation]}
+                            modules={[Navigation, Autoplay]}
                             navigation
-                            pagination={{ clickable: true }}
+                            autoplay={{
+                                delay: 1500,
+                                disableOnInteraction: false
+                            }}
+                            // pagination={{ clickable: true }}
+                            className="marvel-slider-container"
                             >
                             {
                                 charactersList.map( ( character: any ) => {
                                     let characterId = character.resourceURI.replace("http://gateway.marvel.com/v1/public/characters/", "")
                                     return (
-                                        <SwiperSlide >
+                                        <SwiperSlide className="marvel-slider" >
                                             <CharacterSlider key={characterId} characterId={characterId} />
                                         </SwiperSlide>
                                     )

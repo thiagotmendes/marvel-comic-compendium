@@ -6,3 +6,25 @@
 body {
     font-family: 'Nunito Sans', sans-serif !important;
 }
+
+.wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 270px 1fr;
+}
+
+
+.marvel-slider-container .marvel-slider {
+    height: auto;
+    border: black 1px solid;
+}
+
+.marvel-slider-container .swiper-pagination {
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        grid-template-columns: 1fr;
+    }
+}

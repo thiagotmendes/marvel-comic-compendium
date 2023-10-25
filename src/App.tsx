@@ -10,12 +10,14 @@ function App() {
   return (
     <>
       <Header />
-      <div className="container mx-auto flex flex-row pt-8 pb-8">
-        <aside className="pr-4">
-          <Sidebar />
-        </aside>
-        <div className="pl-4">
-          <Outlet />
+      <div className="container mx-auto mt-8 mb-8 pl-4 pr-4 md:pl-0 md:pr-0">
+        <div className="wrapper">
+          <aside>
+            <Sidebar />
+          </aside>
+          <div>
+            <Outlet />
+          </div>
         </div>
       </div>
     </>
