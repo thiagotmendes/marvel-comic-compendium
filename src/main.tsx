@@ -10,7 +10,7 @@ import { Home } from './routes/Home';
 import { ErrorPage } from './routes/ErrorPage';
 
 import App from './App';
-import { CharacterListPage } from './routes/CharacterListPage';
+import { About } from './routes/About';
 
 const router = createBrowserRouter([
   {
@@ -23,8 +23,8 @@ const router = createBrowserRouter([
         element: <Home />
       },
       {
-        path: "characters",
-        element: <CharacterListPage />
+        path: "about",
+        element: <About />
       }
     ]
   }

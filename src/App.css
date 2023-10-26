@@ -10,7 +10,7 @@ body {
 .wrapper {
     width: 100%;
     display: grid;
-    grid-template-columns: 270px 1fr;
+    grid-template-columns: 1fr;
 }
 
 
@@ -23,8 +23,9 @@ body {
     margin-top: 20px;
 }
 
-@media (max-width: 768px) {
-    .wrapper {
-        grid-template-columns: 1fr;
-    }
+.about_container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    width: 60%;
+    margin: auto;
 }

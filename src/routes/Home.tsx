@@ -23,9 +23,14 @@ export function Home() {
     const [modal, setModal] = useState();
     const [status, setStatus ] = useState(false);
 
-    async function getData() {
+    const [currentPage, setCurrentPage] = useState(1);
+
+    async function getData( page: number ) {
+        const limit = 20; // Número de resultados por página
+        const offset = ( page - 1 ) * limit;
+
         await api
-            .get<ComicData>("/comics", {
+            .get<ComicData>("/comics?limit=" + limit + "&offset=" + offset, {
                 params: {
                     ts: import.meta.env.VITE_APP_API_TSL,
                     apikey: import.meta.env.VITE_APP_API_KEY,
@@ -39,8 +44,8 @@ export function Home() {
     }
 
     useEffect( () => {
-        getData()
-    }, []); 
+        getData(currentPage)
+    }, [currentPage]); 
    
     function addModalToPage( _event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, comicId: any ) {
         setModal( comicId );
@@ -48,12 +53,22 @@ export function Home() {
         _event.preventDefault();
     }
 
+    const nextPage = () => {
+        setCurrentPage(currentPage + 1);
+    };
+
+    const prevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
     if ( comics && comics?.data.results.length > 0 ) {
         const comicList = comics?.data.results
 
         return (
             <>
-                <div className="grid grid-cols-1 gap-3 md:grid-cols-4 md:gap-6">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-5 md:gap-6">
                 {
                     comicList.map ( ( comic ) =>  {
                         return(
@@ -68,6 +83,15 @@ export function Home() {
                 }
                 </div>
                 {status && <Modal status={status} setStatus={setStatus} modalId={modal} />}
+
+                <div className="flex justify-center items-center pt-8">
+                    <button className={style.btn} onClick={prevPage}>
+                        Prev
+                    </button>
+                    <button className={style.btn} onClick={nextPage}>
+                        Next
+                    </button>
+                </div>
             </>
         )
     }

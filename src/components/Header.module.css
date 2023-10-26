@@ -3,3 +3,25 @@
     -moz-box-shadow: 1px 10px 31px -7px rgba(0,0,0,0.75);
     box-shadow: 1px 10px 31px -7px rgba(0,0,0,0.75);
 }
+
+.logo {
+    height: 57px;
+}
+
+.about_button {
+    display: block;
+    position: absolute;
+    right: 14px;
+}
+
+.about_button a {
+    color: white;
+    border: 1 solid gray;
+    background-color: rgb(229, 103, 103);
+    margin-left: 10px;
+    padding: 5px 10px;
+}
+
+.about_button a:hover {
+    background-color: rgb(184, 77, 77);
+}

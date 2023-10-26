@@ -17,6 +17,7 @@ import 'swiper/css/pagination';
 interface ModalComicData {
     data: {
         results: {
+            id: number;
             title: string;
             description: string
             thumbnail: {
@@ -34,7 +35,7 @@ export function Modal(props: any) {
     const [comic, setComic] = useState<ModalComicData | null>(null);
     const { setStatus } = props;
 
-    async function getData() {
+    async function getComicData() {
         await api
             .get<ModalComicData>("/comics/" + props.modalId, {
                 params: {
@@ -50,16 +51,16 @@ export function Modal(props: any) {
     }
     
     useEffect(() => {
-         getData();
+        getComicData();
     }, []); 
 
     function closeButton(_event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
         setStatus(false)
     }
-    
-    if ( comic && comic?.data.results.length > 0 ) {
-        const charactersList = comic?.data.results[0].characters.items
 
+    if ( comic && comic?.data.results.length > 0 ) {
+        const charactersList: any[] = comic?.data.results[0].characters.items
+        
         return (
             <div id="modal-box"  className={modalStyle.modal} > 
                 <div className={modalStyle.modalBody}>
@@ -70,33 +71,38 @@ export function Modal(props: any) {
                     <div className={modalStyle.modalDescription}>
                         <h2> { comic.data.results[0].title } </h2>
                         <div>
-                            { parse(comic.data.results[0].description) }
+                            { comic.data.results[0].description !== null && parse(comic.data.results[0].description) }
                         </div> 
-                        <h4 className={modalStyle.character_list_title}> Character list </h4>
-                        <Swiper 
-                            key="1"
-                            spaceBetween={15}
-                            slidesPerView={3}
-                            modules={[Navigation, Autoplay]}
-                            navigation
-                            autoplay={{
-                                delay: 1500,
-                                disableOnInteraction: false
-                            }}
-                            // pagination={{ clickable: true }}
-                            className="marvel-slider-container"
-                            >
-                            {
-                                charactersList.map( ( character: any ) => {
-                                    let characterId = character.resourceURI.replace("http://gateway.marvel.com/v1/public/characters/", "")
-                                    return (
-                                        <SwiperSlide className="marvel-slider" >
-                                            <CharacterSlider key={characterId} characterId={characterId} />
-                                        </SwiperSlide>
-                                    )
-                                })
-                            }
-                        </Swiper>
+                        {
+                            charactersList.length > 0 && 
+                            <>
+                            <h4 className={modalStyle.character_list_title}> Character list </h4>
+                            <Swiper 
+                                key={props.modalId}
+                                spaceBetween={15}
+                                slidesPerView={3}
+                                modules={[Navigation, Autoplay]}
+                                navigation
+                                autoplay={{
+                                    delay: 1500,
+                                    disableOnInteraction: false
+                                }}
+                                // pagination={{ clickable: true }}
+                                className="marvel-slider-container"
+                                >
+                                {
+                                    charactersList.map( ( character: any ) => {
+                                        let characterId = character.resourceURI.replace("http://gateway.marvel.com/v1/public/characters/", "")
+                                        return (
+                                            <SwiperSlide className="marvel-slider" >
+                                                <CharacterSlider key={characterId} characterId={characterId} />
+                                            </SwiperSlide>
+                                        )
+                                    })
+                                }
+                            </Swiper>
+                            </>
+                        }
                     </div>
                 </div>
             </div>

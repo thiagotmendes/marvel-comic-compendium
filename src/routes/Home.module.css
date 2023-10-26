@@ -16,7 +16,16 @@
     height: 69px;
 }
 
-/* .box_img {
-    height: 366px;
-    overflow: hidden;
-} */
+.btn {
+    background-color: rgb(147, 147, 169);
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 16px;
+    padding: 5px 15px;
+    border: 1px solid rgb(147, 147, 169);
+    margin: 0 10px;
+}
+
+.btn:hover {
+    background-color: rgb(120, 120, 139);
+}
